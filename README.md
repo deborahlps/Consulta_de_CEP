@@ -30,3 +30,11 @@ Este é um projeto simples em **HTML**, **CSS** e **JavaScript** que permite ao 
 2. Clique no botão **"Buscar"**.
 3. Os campos de endereço serão preenchidos automaticamente com base no CEP informado.
 
+---
+## Contato
+
+Para dúvidas, sugestões ou qualquer contato, envie um email para:
+deborahlps262@gmail.com
+
+
+Feito com ❤️ Deborah
