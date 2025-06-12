@@ -34,7 +34,7 @@ Este é um projeto simples em **HTML**, **CSS** e **JavaScript** que permite ao 
 ## Contato
 
 Para dúvidas, sugestões ou qualquer contato, envie um email para:
-deborahlps262@gmail.com
+deborahlopes262@gmail.com
 
 
 Feito com ❤️ Deborah
