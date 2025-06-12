@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de CEP - ViaCEP</title>
+</head>
+<style>
+    body {
+        padding: 20px;
+        background-image: url('https://conteudo.imguol.com.br/c/entretenimento/aa/2021/11/23/parque-vaca-brava-em-goiania-1637680716999_v2_900x506.jpg');
+    }
+
+    h3 {
+        font-size: 30px;
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: #3a6073;
+    }
+
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #fdf8f8;
+        padding: 20px;
+        border-radius: 20px;
+        bottom: -10px;
+
+    }
+
+    label {
+        display: block;
+        margin-top: 20px;
+        font-weight: bold;
+        color: #3a6073;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
+    button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 10px;
+        background: linear-gradient(45deg, #3a7bd5, #3a6073);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 19px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    button:hover {
+        background: linear-gradient(45deg, #2980b9, #2c3e50);
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+</style>
+
+<body>
+
+    <form id="formulario">
+        <h3>Consulta de Cep</h3>
+        <label for="cep">Cep:</label>
+        <input type="text" id="cep" name="cep" placeholder="Digite o CEP" required>
+
+        <label for="logradouro">Logradouro:</label>
+        <input type="text" id="logradouro" name="logradouro" readonly>
+
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" name="bairro" readonly>
+
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" readonly>
+
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" name="estado" readonly>
+
+        <button type="submit" class="button">Buscar</button>
+
+    </form>
+    <script>
+        document.getElementById("formulario").addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const cep = document.getElementById('cep').value.replace(/\D/g, '');
+
+            if (cep.length !== 8) {
+                alert('CEP inválido!');
+                return;
+            }
+
+            try {
+                const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+
+                const dados = await resposta.json();
+
+                if (dados.erro) {
+                    alert('CEP não encontrado!');
+                    return;
+                }
+
+                document.getElementById('logradouro').value = dados.logradouro;
+                document.getElementById('bairro').value = dados.bairro;
+                document.getElementById('cidade').value = dados.localidade;
+                document.getElementById('estado').value = dados.uf;
+
+            } catch (error) {
+                alert('Erro ao consultar o CEP. Tente novamente mais tarde.');
+                console.error(error);
+
+            }
+
+        })
+    </script>
+</body>
+
+</html>
